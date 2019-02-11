@@ -32,8 +32,8 @@ export default class Decorate extends Component {
             [[D, D, D, H],
              [H, D, H, H]])}
           {this.renderShapeBlock(
-            [[D, D, H, H],
-             [D, D, H, H]])}
+            [[H, D, D, H],
+             [H, D, D, H]])}
           {this.renderShapeBlock(
             [[H, D, H, H],
              [D, D, D, H]])}
@@ -70,8 +70,8 @@ export default class Decorate extends Component {
             [[H, D, H, H],
              [D, D, D, H]])}
           {this.renderShapeBlock(
-            [[D, D, H, H],
-             [D, D, H, H]])}
+            [[H, D, D, H],
+             [H, D, D, H]])}
           {this.renderShapeBlock(
             [[D, D, D, H],
              [H, D, H, H]])}
@@ -90,9 +90,9 @@ export default class Decorate extends Component {
   renderShapeBlock = (matrix: MatrixState[][]) => {
     return (
       <View style={styles.shapeBlock}>
-        {matrix.map((l: MatrixState[]) => {
-          return l.map(v => {
-            return <Block color={v == D ? 'black' : 'rgba(0,0,0,0)'} />
+        {matrix.map((l: MatrixState[], i: number) => {
+          return l.map((v: MatrixState, j: number ) => {
+            return <Block key={`${i}+${j}`} color={v == D ? 'black' : 'rgba(0,0,0,0)'} />
           })
         })}
       </View>
