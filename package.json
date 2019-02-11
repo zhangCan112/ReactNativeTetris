@@ -12,6 +12,7 @@
     "immutable": "^4.0.0-rc.12",
     "react": "16.6.3",
     "react-native": "0.58.4",
+    "react-native-linear-gradient": "^2.5.3",
     "redux-immutable": "^4.0.0"
   },
   "devDependencies": {
