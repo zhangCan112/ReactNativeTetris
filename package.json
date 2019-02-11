@@ -7,9 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-redux": "^7.0.1",
+    "@types/redux-immutable": "^4.0.1",
     "immutable": "^4.0.0-rc.12",
     "react": "16.6.3",
-    "react-native": "0.58.4"
+    "react-native": "0.58.4",
+    "redux-immutable": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.0",
@@ -21,7 +24,10 @@
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
     "react-native-typescript-transformer": "^1.2.11",
+    "react-redux": "^6.0.0",
     "react-test-renderer": "16.6.3",
+    "redux": "^4.0.1",
+    "redux-devtools": "^3.5.0",
     "ts-jest": "^23.10.5",
     "typescript": "^3.3.3"
   },
