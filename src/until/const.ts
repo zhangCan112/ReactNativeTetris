@@ -74,4 +74,5 @@ export default {
     blockShape,  
     fillLine,
     blankLine,
+    blankMatrix
 }

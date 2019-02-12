@@ -153,7 +153,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   children: {
-    flex: 1
+    flex: 1, 
+    justifyContent: 'center',   
+    alignItems: 'center',
   },
   shapeBlock: {
     display: 'flex',

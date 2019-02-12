@@ -12,13 +12,18 @@ import { Component } from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Decorate from "./src/components/decorate";
 import Keyboard from "./src/components/keyboard";
+import Matrix from './src/components/matrix';
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.app}>
-      <Decorate></Decorate>
+      <Decorate>
+        <View style={styles.container}>
+        <Matrix></Matrix>
+        </View>
+      </Decorate>
       <Keyboard></Keyboard>
       </View>
     );
@@ -33,4 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#efcc19',
     borderRadius: 8
   },
+  container: {  
+    backgroundColor: '#9ead86',                
+  }
 });
