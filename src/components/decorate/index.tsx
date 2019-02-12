@@ -105,7 +105,7 @@ export default class Decorate extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 4,
     flexDirection: 'row',
     marginTop: 30,
   },

@@ -10,8 +10,11 @@ import React, { Children } from 'react'
 import { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
+import constValue from '../../../until/const'
+let screenPoint = constValue.screenWidthPoint
+
 export enum Direction {
-    Top,
+    Up = 1,
     Left,
     Down,
     Right
@@ -35,9 +38,9 @@ export interface IProps {
 
 export default class ControlButton extends Component<IProps> {
     render() {
-        let buttonStyle = createButtonStyle(this.props.size)
+let buttonStyle = createButtonStyle(this.props.size * screenPoint)
         let containerStyle = createContainerStyle(this.props)
-        let labelSize = (this.props.size == Size.S1 || this.props.size == Size.S2) ? 20 : 12;
+        let labelSize = (this.props.size == Size.S1 || this.props.size == Size.S2) ? 17 : 12;
         return (
             <View style={containerStyle}>
                 <TouchableOpacity onPress={this.props.onPress} >
@@ -52,7 +55,7 @@ export default class ControlButton extends Component<IProps> {
 const createContainerStyle = (props: IProps) => {
     let directionCreator = (labelDirection: Direction) => {
         switch (labelDirection) {
-            case Direction.Top:
+            case Direction.Up:
                 return 'column-reverse'
             case Direction.Down:
                 return 'column'
@@ -64,8 +67,8 @@ const createContainerStyle = (props: IProps) => {
     }
     return StyleSheet.create({
         container: {
-            flexDirection: directionCreator(props.labelDirection || Direction.Down),
-            alignItems: 'center',            
+            flexDirection: directionCreator(props.labelDirection ? props.labelDirection : Direction.Down),
+            alignItems: 'center',                        
         }
     }).container;
 }
