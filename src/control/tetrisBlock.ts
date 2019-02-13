@@ -1,3 +1,9 @@
+/**
+ *  下落方块的定义类
+ *
+ * @format
+ * @lint-ignore-every XPLATJSCOPYRIGHT1
+ */
 import { List, fromJS } from 'immutable';
 import { BlockType, MatrixPoint } from '../until/const';
 import constValue from '../until/const';
@@ -11,8 +17,8 @@ let blockShape = constValue.blockShape
 export interface TetrisBlockOption {
     type: BlockType,
     shape?: List<List<MatrixPoint>>,
-    loc: Point,
-    rotateIndex: number,
+    loc?: Point,
+    rotateIndex?: number,
     timeStamp?: number
 }
 
@@ -27,27 +33,30 @@ export default class TetrisBlock {
     constructor(option: TetrisBlockOption) {
         this.type = option.type
 
-        this.rotateIndex = option.rotateIndex
+        if (option.rotateIndex) {
+            this.rotateIndex = option.rotateIndex!           
+        }
+       
 
         this.timeStamp = option.timeStamp ||  Date.now()
         
         if(option.shape) {
-            this.shape = option.shape
+            this.shape = option.shape!
         } else {            
             this.shape = List(blockShape[this.type].map(m => List(m)))
         }
         
         if (option.loc) {
-            this.loc = option.loc
+            this.loc = option.loc!
         } else {
             let originLocs = {
-                I : new Point(0, 3),
-                L : new Point(-1, 4),
-                J : new Point(-1, 4),
-                Z : new Point(-1, 4),
-                S : new Point(-1, 4),
-                O : new Point(-1, 4),
-                T : new Point(-1, 4),
+                I : new Point(3, 0),
+                L : new Point(4, -1),
+                J : new Point(4, -1),
+                Z : new Point(4, -1),
+                S : new Point(4, -1),
+                O : new Point(4, -1),
+                T : new Point(4, -1),
             }
             this.loc = originLocs[this.type]
         }        
@@ -87,7 +96,7 @@ export default class TetrisBlock {
     }
 
     ///下落
-    fall = (step: number): TetrisBlockOption => {
+    fall = (step: number = 1): TetrisBlockOption => {
         return {
             type: this.type,
             shape: this.shape,

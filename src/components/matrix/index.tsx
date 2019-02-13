@@ -11,11 +11,19 @@ import { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Block from '../block';
 
-import constValue, { MatrixPoint } from '../../until/const'
+
+import constValue, { MatrixPoint, BlockType } from '../../until/const'
+import MatrixManager from '../../control/matrixManager';
+import TetrisBlock from '../../control/tetrisBlock';
+import Point from '../../until/point';
 
 export default class Matrix extends Component {
     render() {
         let matrix = constValue.blankMatrix
+        matrix = MatrixManager.getStartMatrix(3) 
+        let a =  new TetrisBlock({type: BlockType.I, loc: new Point(4, 0)})
+        let next =  new TetrisBlock(a.rotate())
+        matrix = MatrixManager.getFinalMatrix(matrix, next)         
         return (
             <View style={styles.container}>
                 {
