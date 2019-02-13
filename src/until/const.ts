@@ -4,6 +4,10 @@ import { List } from 'immutable';
 ///设备宽高
 var { height, width } = Dimensions.get('window');
 
+
+
+
+
 ///俄罗斯方块形状定义
 export enum BlockType {
     I = 'I',
