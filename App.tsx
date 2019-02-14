@@ -14,8 +14,9 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import Decorate from "./src/components/decorate";
 import Keyboard from "./src/components/keyboard";
 import Matrix from './src/components/matrix';
+import { GlobalState, StateMapObject } from './src/reducers';
 
-type Props = {};
+type Props = GlobalProps;
 class App extends Component<Props> {
   render() {
     return (
@@ -44,4 +45,27 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect((state, props)=>({state,}))(App)
+
+const mapStateToProps = (state: GlobalState) => ({
+  pause: state.get('pause') as StateMapObject['pause'],  
+  matrix: state.get('matrix') as StateMapObject['matrix'],
+  next: state.get('next') as StateMapObject['matrix'],
+  cur: state.get('cur') as StateMapObject['cur'],    
+  startLines: state.get('startLines') as StateMapObject['startLines'],
+  clearLines: state.get('clearLines') as StateMapObject['clearLines'],
+  points: state.get('points') as StateMapObject['points'],
+  max: state.get('max') as StateMapObject['max'],  
+});
+export default connect(mapStateToProps)(App)
+
+
+/***
+ * 实现全局props类型化
+ */
+function returnPropsType<FullProps>(func: (state: any)=>FullProps){
+  return {} as FullProps
+}
+
+let mockGlobalProps = returnPropsType(mapStateToProps)
+
+type GlobalProps =  typeof mockGlobalProps
