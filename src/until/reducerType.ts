@@ -1,3 +1,4 @@
+import { Action } from './action';
 
 export const PAUSE = 'PAUSE';
 export const MUSIC = 'MUSIC';
@@ -22,3 +23,13 @@ export const KEY_RESET = 'KEY_RESET';
 export const KEY_MUSIC = 'KEY_MUSIC';
 export const KEY_PAUSE = 'KEY_PAUSE';
 export const FOCUS = 'FOCUS';
+
+export let reducerCreator = <T>(type: string, initState: T) => (state: T = initState, action: Action<T>) =>  {
+    switch (action.type) {
+        case type:
+            return action.data            
+        default:
+            return state
+    }
+}
+  

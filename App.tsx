@@ -9,13 +9,14 @@
 
 import React from 'react'
 import { Component } from 'react';
+import { connect } from 'react-redux'
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Decorate from "./src/components/decorate";
 import Keyboard from "./src/components/keyboard";
 import Matrix from './src/components/matrix';
 
 type Props = {};
-export default class App extends Component<Props> {
+class App extends Component<Props> {
   render() {
     return (
       <View style={styles.app}>
@@ -42,3 +43,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#9ead86',                
   }
 });
+
+export default connect((state, props)=>({state,}))(App)
