@@ -8,7 +8,6 @@ import { List, fromJS } from 'immutable';
 import { BlockType, MatrixPoint } from '../until/const';
 import constValue from '../until/const';
 import Point from '../until/point'
-import { shape } from 'prop-types';
 
 let rotateOrigin = constValue.origin
 let blockShape = constValue.blockShape

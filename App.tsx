@@ -15,15 +15,21 @@ import Decorate from "./src/components/decorate";
 import Keyboard from "./src/components/keyboard";
 import Matrix from './src/components/matrix';
 import { GlobalState, StateMapObject } from './src/reducers';
+import states from './src/control/states';
 
 type Props = GlobalProps;
 class App extends Component<Props> {
+
+  componentDidMount() {
+    states.start()
+  }
+
   render() {
     return (
       <View style={styles.app}>
       <Decorate>
         <View style={styles.container}>
-        <Matrix></Matrix>
+        <Matrix matrix={this.props.matrix} cur={this.props.cur}></Matrix>
         </View>
       </Decorate>
       <Keyboard></Keyboard>
@@ -54,7 +60,7 @@ const mapStateToProps = (state: GlobalState) => ({
   startLines: state.get('startLines') as StateMapObject['startLines'],
   clearLines: state.get('clearLines') as StateMapObject['clearLines'],
   points: state.get('points') as StateMapObject['points'],
-  max: state.get('max') as StateMapObject['max'],  
+  max: state.get('max') as StateMapObject['max'],   
 });
 export default connect(mapStateToProps)(App)
 

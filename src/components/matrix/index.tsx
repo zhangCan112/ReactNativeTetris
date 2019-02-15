@@ -6,24 +6,31 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React, { Children } from 'react'
+import React from 'react'
 import { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Block from '../block';
+import { List } from 'immutable';
 
-
-import constValue, { MatrixPoint, BlockType } from '../../until/const'
+import constValue, { MatrixPoint } from '../../until/const'
 import MatrixManager from '../../control/matrixManager';
 import TetrisBlock from '../../control/tetrisBlock';
-import Point from '../../until/point';
 
-export default class Matrix extends Component {
+
+
+interface IProps {
+    matrix: List<List<MatrixPoint>>,
+    cur?: TetrisBlock
+}
+
+
+export default class Matrix extends Component<IProps> {
     render() {
-        let matrix = constValue.blankMatrix
-        matrix = MatrixManager.getStartMatrix(3) 
-        let a =  new TetrisBlock({type: BlockType.I, loc: new Point(4, 0)})
-        let next =  new TetrisBlock(a.rotate())
-        matrix = MatrixManager.getFinalMatrix(matrix, next)         
+        let matrix = this.props.matrix
+        let cur = this.props.cur
+        if (cur) {
+            matrix = MatrixManager.getFinalMatrix(matrix, cur)            
+        }                
         return (
             <View style={styles.container}>
                 {

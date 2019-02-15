@@ -9,6 +9,7 @@ import { List } from 'immutable';
 import { MatrixPoint } from './../until/const';
 import constValue from './../until/const';
 import TetrisBlock from './tetrisBlock';
+import { TetrisBlockOption } from './tetrisBlock';
 import { BlockType } from './../until/const';
 
 class MatrixManager {
@@ -56,18 +57,22 @@ class MatrixManager {
     }
 
     ///方块是否能移到到指定位置
-    want = (matrix: List<List<MatrixPoint>>, next: TetrisBlock) => {
-        let loc = next.loc
-        let shape = next.shape
+    want = (matrix: List<List<MatrixPoint>>, next: TetrisBlockOption) => {
+        let loc = next.loc!
+        let shape = next.shape!
+        let want = true
         shape.reverse().forEach((row, x) => row.forEach((p, y) => {
             if (loc.x < 0) {//左边
+                want = false
                 return false
             }
             if (loc.x + shape.size > constValue.fillLine.length) {//右边
+                want = false
                 return false;
             }
 
             if (loc.y + y >= matrix.size) {//底部
+                want = false
                 return false
             }
             //这个点p的所在坐标
@@ -75,6 +80,7 @@ class MatrixManager {
             let py = loc.y + y
             if (p == MatrixPoint.O) { //和matrix上的亮点撞了，则不能移动
                 if (matrix.get(py)!.get(px)! == MatrixPoint.O) {
+                    want = false
                     return false
                 }
 
@@ -83,6 +89,7 @@ class MatrixManager {
 
             return true
         }))
+        return want
     }
 
     ///是否达到消除状态
