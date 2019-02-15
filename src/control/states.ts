@@ -20,8 +20,7 @@ class States {
       let state = store.getState() as any as GlobalState
       
       //生成初始矩阵
-      let startLines =  state.get('startLines') as StateMapObject['startLines']
-      startLines = 1
+      let startLines =  state.get('startLines') as StateMapObject['startLines']      
       let startMatrix = MatrixManager.getStartMatrix(startLines);
       store.dispatch(actions.matrix(startMatrix)) 
 

@@ -43,7 +43,7 @@ let buttonStyle = createButtonStyle(this.props.size * screenPoint)
         let labelSize = (this.props.size == Size.S1 || this.props.size == Size.S2) ? 17 : 12;
         return (
             <View style={containerStyle}>
-                <TouchableOpacity onPress={this.props.onPress} >
+                <TouchableOpacity onPress={this.props.onPress}>
                     <LinearGradient style={buttonStyle} colors={this.props.colors} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: labelSize}}>{this.props.label}</Text>
