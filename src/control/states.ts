@@ -35,7 +35,7 @@ class States {
 
 
   //自动下落
-  auto = (timeout = 100) => {
+  auto = (timeout = 300) => {
    let fall = () => {
       let state = store.getState() as any as GlobalState
       let cur = state.get('cur') as StateMapObject['cur']

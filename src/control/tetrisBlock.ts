@@ -80,7 +80,12 @@ export default class TetrisBlock {
         }))
 
         //新的坐标起点
-        let nextLoc: Point = new Point(this.loc.x + rotateOrigin[this.type][this.rotateIndex][0],
+        let nextX = this.loc.x + rotateOrigin[this.type][this.rotateIndex][0]
+        //靠近左边边距，则移动到0
+        nextX = Math.max(0, nextX)
+        //靠近右边边距，则移动到 边距 - x
+        nextX = Math.min(constValue.blankLine.length - nextShape.size, nextX)
+        let nextLoc: Point = new Point(nextX,
                                        this.loc.y + rotateOrigin[this.type][this.rotateIndex][1])
 
         //新的旋转位置
