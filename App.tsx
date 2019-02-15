@@ -17,6 +17,7 @@ import Matrix from './src/components/matrix';
 import { GlobalState, StateMapObject } from './src/reducers';
 import states from './src/control/states';
 import control from './src/control';
+import Number from './src/components/number';
 
 type Props = GlobalProps;
 class App extends Component<Props> {
@@ -31,6 +32,7 @@ class App extends Component<Props> {
       <Decorate>
         <View style={styles.container}>
         <Matrix matrix={this.props.matrix} cur={this.props.cur}></Matrix>
+        <Number></Number>
         </View>
       </Decorate>
       <Keyboard left={control.left} right={control.right} rotate={control.rotate}></Keyboard>
