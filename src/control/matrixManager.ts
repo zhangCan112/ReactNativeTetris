@@ -108,6 +108,17 @@ class MatrixManager {
         return clearLines
     }
 
+    ///消除指定行的方块
+    clearLines = (matrix: List<List<MatrixPoint>>, lines: number[]) => {
+        lines = lines.sort((a, b) => a - b)
+        for (let i = 0; i < lines.length; i++) {
+            let row = lines[i];
+            matrix =  matrix.delete(row)
+            matrix = matrix.unshift(List(constValue.blankLine))            
+        }
+        return matrix
+    }
+
     /**
      * 私有方法
      */

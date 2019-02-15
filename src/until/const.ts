@@ -69,9 +69,9 @@ const origin = {
 };
 
 
-const fillLine = [O, O, O, O, O, O, O, O, O, O,];
+const fillLine: Array<MatrixPoint> = [O, O, O, O, O, O, O, O, O, O,];
 
-const blankLine = [X, X, X, X, X, X, X, X, X, X];
+const blankLine: Array<MatrixPoint>= [X, X, X, X, X, X, X, X, X, X];
 
 const blankMatrix = (() => {
     let matrix: List<MatrixPoint>[] = []

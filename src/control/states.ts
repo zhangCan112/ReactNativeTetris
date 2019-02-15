@@ -21,6 +21,7 @@ class States {
       
       //生成初始矩阵
       let startLines =  state.get('startLines') as StateMapObject['startLines']
+      startLines = 1
       let startMatrix = MatrixManager.getStartMatrix(startLines);
       store.dispatch(actions.matrix(startMatrix)) 
 
@@ -68,6 +69,14 @@ class States {
     store.dispatch(actions.nextBlock(MatrixManager.getNextType()))
     //自动下落
     states.auto()                 
+  }
+
+  //消除行
+  clearLines = (lines: number[]) => {
+    let state = store.getState() as any as GlobalState      
+    let matrix = state.get('matrix') as StateMapObject['matrix']
+    let nextMatrix =  MatrixManager.clearLines(matrix, lines)
+    store.dispatch(actions.matrix(nextMatrix))        
   }
 
   
