@@ -16,7 +16,6 @@ import constValue, { MatrixPoint } from '../../until/const'
 import MatrixManager from '../../control/matrixManager';
 import TetrisBlock from '../../control/tetrisBlock';
 import states from '../../control/states';
-import { number } from 'prop-types';
 
 
 

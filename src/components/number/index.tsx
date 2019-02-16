@@ -21,7 +21,7 @@ export default class Number extends Component<Iprops> {
     
     render() {
         let maxLength = this.props.maxLength || 1
-        let text = this.props.text || '10:15'
+        let text = this.props.text || ''
         let textToImages = () => {            
             let chars = text.split('')            
             let images = chars.map((c: string) => this.imgaeNumberSource(c)) 
@@ -53,6 +53,7 @@ export default class Number extends Component<Iprops> {
         case '8': return require('../../resource/images/num_8.png');
         case '9': return require('../../resource/images/num_9.png'); 
         case ':': return require('../../resource/images/num_colon_on.png');
+        case '|': return require('../../resource/images/num_colon_off.png');
         default:
             return nullImg
     }             
