@@ -81,24 +81,6 @@ const blankMatrix = (() => {
     return List(matrix)
 })()
 
-
-//图片数字map
-let  imgaeNumberSource = {
-    '0': require('../resource/images/num_0.png'),
-    '1': require('../resource/images/num_1.png'),
-    '2': require('../resource/images/num_2.png'),
-    '3': require('../resource/images/num_3.png'),
-    '4': require('../resource/images/num_4.png'),
-    '5': require('../resource/images/num_5.png'),
-    '6': require('../resource/images/num_6.png'),
-    '7': require('../resource/images/num_7.png'),
-    '8': require('../resource/images/num_8.png'),
-    '9': require('../resource/images/num_9.png'), 
-    ':': require('../resource/images/num_colon_on.png'),     
-}
-
-
-
 export default {
     screenWidth: width,
     screenHeight: height,
@@ -107,6 +89,5 @@ export default {
     origin,
     fillLine,
     blankLine,
-    blankMatrix,
-    imgaeNumberSource,
+    blankMatrix,    
 }
