@@ -83,11 +83,26 @@ class States {
     if (points >  maxPoints) {
       store.dispatch(actions.max(points))
     }
-    
+
     //更新矩阵         
     let matrix = state.get('matrix') as StateMapObject['matrix']
     let nextMatrix =  MatrixManager.clearLines(matrix, lines)
     store.dispatch(actions.matrix(nextMatrix))        
+  }
+  
+  //暂停
+  pause = () => {
+    let state = store.getState() as any as GlobalState
+    let pause = state.get('pause') as StateMapObject['pause']
+    let next = !pause
+    if (next == true) {
+      if (this.fallInterval) {
+        clearTimeout(this.fallInterval)    
+      }  
+    } else {
+      this.auto()      
+    } 
+    store.dispatch(actions.pause(next))   
   }
 
   

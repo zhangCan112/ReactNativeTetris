@@ -59,13 +59,21 @@ class App extends Component<IProps, IState> {
             {this.renderNumberPad()}
           </View>
         </Decorate>
-        <Keyboard left={control.left} right={control.right} rotate={control.rotate}></Keyboard>
+        <Keyboard 
+        left={control.left} 
+        right={control.right} 
+        rotate={control.rotate}
+        pause={control.pause}
+        />
       </View>
     );
   }
   renderNumberPad = () => {
     let soundSrc = soundOffSrc
-    let pauseSrc =  (this.state.blinkCount%2) == 1 ? pauseOnSrc : pauseOffSrc;    
+    let pauseSrc = pauseOffSrc
+    if (this.props.pause == true) {
+      pauseSrc = (this.state.blinkCount%2) == 1 ? pauseOnSrc : pauseOffSrc;     
+    }     
     let level = `${this.props.cur ? this.props.speedRun : this.props.speedStart}`
     let scoreTitle = (this.state.blinkCount%16) > 8 ? '最高分' : '得分'
     let score = (this.state.blinkCount%16) > 8 ? this.props.max : this.props.points
