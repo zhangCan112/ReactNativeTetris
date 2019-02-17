@@ -107,10 +107,10 @@ export default class Matrix extends Component<IProps, IState> {
                     ...this.state,
                     overStep: this.state.overStep + 1
                 })
-                setTimeout(onceAnimate, 100)
+                setTimeout(onceAnimate, 50)
             }  
         }
-        setTimeout(onceAnimate, 100)
+        setTimeout(onceAnimate, 50)
     }
 
     render() {

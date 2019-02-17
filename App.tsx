@@ -154,10 +154,10 @@ const padStyles = StyleSheet.create({
     alignSelf: 'stretch',
     height: 20,
   },
-  title: {
+  title: {     
     paddingTop: 12,
     paddingBottom: 7,
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-start',    
   },
   statusIcon: {
     width: 15,
