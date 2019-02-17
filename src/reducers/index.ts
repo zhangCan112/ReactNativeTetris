@@ -7,6 +7,7 @@ import next from './next';
 import pause from './pause';
 import points from './points';
 import startLines from './startLines';
+import speed from './speed';
 import { Map } from 'immutable';
 import { ReducersMapObject } from 'redux';
 import { Reducer } from 'react';
@@ -21,6 +22,7 @@ let reducersMapObject = {
   max,
   points,
   pause,
+  speed,
 }
 
 const rootReducer = combineReducers(reducersMapObject);

@@ -22,17 +22,32 @@ import Next from './src/components/next';
 import Time from './src/components/time';
 
 
-let soundOnSrc = './src/resource/images/music_on.png'
-let soundOffSrc = './src/resource/images/music_off.png'
+let soundOnSrc = require('./src/resource/images/music_on.png')
+let soundOffSrc = require('./src/resource/images/music_off.png')
 
-let pauseOnSrc = './src/resource/images/pause_on.png'
-let pauseOffSrc = './src/resource/images/pause_off.png'
+let pauseOnSrc = require('./src/resource/images/pause_on.png')
+let pauseOffSrc = require('./src/resource/images/pause_off.png')
 
-type Props = GlobalProps;
-class App extends Component<Props> {
+let timeInterval = 0
+
+type IProps = GlobalProps;
+
+interface IState {
+  blinkCount: number
+}
+
+class App extends Component<IProps, IState> {
+
+  constructor(props: IProps) {
+    super(props)
+    this.state = {
+      blinkCount: 0
+    }
+  }
 
   componentDidMount() {
-    states.start()
+    this.blink()
+    states.start()    
   }
 
   render() {
@@ -50,26 +65,29 @@ class App extends Component<Props> {
   }
   renderNumberPad = () => {
     let soundSrc = soundOffSrc
-    let pauseSrc = pauseOnSrc
+    let pauseSrc =  (this.state.blinkCount%2) == 1 ? pauseOnSrc : pauseOffSrc;    
+    let level = `${this.props.cur ? this.props.speedRun : this.props.speedStart}`
+    let scoreTitle = (this.state.blinkCount%16) > 8 ? '最高分' : '得分'
+    let score = (this.state.blinkCount%16) > 8 ? this.props.max : this.props.points
     return (<View style={padStyles.container}>
       <View style={padStyles.numbers}>
-        <Text style={padStyles.title}>{'最高分'}</Text>
-        <Number maxLength={6} text={'999'}></Number>
+        <Text style={padStyles.title}>{scoreTitle}</Text>
+        <Number maxLength={6} text={`${score}`}></Number>
         <Text style={padStyles.title}>{'起始行'}</Text>
-        <Number maxLength={6} text={'999'}></Number>
+        <Number maxLength={6} text={`${this.props.startLines}`}></Number>
         <Text style={padStyles.title}>{'级别'}</Text>
-        <Number maxLength={1} text={'999'}></Number>
+        <Number maxLength={1} text={level}></Number>
         <Text style={padStyles.title}>{'下一个'}</Text>
         <Next shapeType={this.props.next} />
       </View>
       <View style={padStyles.statusBar}>
       <Image 
-      source={require(soundSrc)} 
+      source={soundSrc} 
       style={padStyles.statusIcon} 
       width={padStyles.statusIcon.width}
       height={padStyles.statusIcon.height}/>
       <Image 
-      source={require(pauseSrc)} 
+      source={pauseSrc} 
       style={padStyles.statusIcon}
       width={padStyles.statusIcon.width}
       height={padStyles.statusIcon.height}/>
@@ -77,6 +95,15 @@ class App extends Component<Props> {
       </View>      
     </View>)
   }
+
+  blink = () => {
+    timeInterval = setTimeout(() => {        
+        this.setState({
+            blinkCount: this.state.blinkCount + 1
+        })      
+        this.blink()
+    }, 500);        
+}
 
 }
 
@@ -114,7 +141,7 @@ const padStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     alignSelf: 'stretch',
-    height: 20,    
+    height: 20,
   },
   title: {
     paddingTop: 12,
@@ -137,6 +164,8 @@ const mapStateToProps = (state: GlobalState) => ({
   clearLines: state.get('clearLines') as StateMapObject['clearLines'],
   points: state.get('points') as StateMapObject['points'],
   max: state.get('max') as StateMapObject['max'],
+  speedRun: (state.get('speed') as StateMapObject['speed']).get('run') as number,
+  speedStart: (state.get('speed') as StateMapObject['speed']).get('start') as number,
 });
 export default connect(mapStateToProps)(App)
 

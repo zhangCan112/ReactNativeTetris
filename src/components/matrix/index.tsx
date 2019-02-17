@@ -59,15 +59,15 @@ export default class Matrix extends Component<IProps, IState> {
     clearAnimate = (clears: number[]) => {        
         let onceAnimate = () => { 
             if (this.state.animateStep > 3) {//动画结束
-                let lines  = this.state.clearLins                
+                let lines  = this.state.clearLins
+                states.clearLines(lines)                 
                 this.setState({
                     ...this.state,
                     clearLins: [],
                     animateStep: 0,
                     animateColor: '#000000',
                     animateOver: true                    
-                })                               
-                states.clearLines(lines) 
+                })                                               
             } else {
                 this.setState({
                     ...this.state,

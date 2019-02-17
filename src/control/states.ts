@@ -10,6 +10,7 @@ import { GlobalState, StateMapObject } from '../reducers';
 import MatrixManager from './matrixManager';
 import actions from '../actions';
 import TetrisBlock from './tetrisBlock';
+import constValue from '../until/const';
 
 class States {
   // 自动下落setTimeout变量
@@ -72,7 +73,18 @@ class States {
 
   //消除行
   clearLines = (lines: number[]) => {
-    let state = store.getState() as any as GlobalState      
+    let state = store.getState() as any as GlobalState 
+    //计算和更新当前分数 和 最高分数
+    let curPoints = state.get('points') as StateMapObject['points']
+    let maxPoints = state.get('max') as StateMapObject['max']
+    let addPoints = constValue.clearPoints[lines.length - 1]
+    let points = curPoints + addPoints
+    store.dispatch(actions.points(points))
+    if (points >  maxPoints) {
+      store.dispatch(actions.max(points))
+    }
+    
+    //更新矩阵         
     let matrix = state.get('matrix') as StateMapObject['matrix']
     let nextMatrix =  MatrixManager.clearLines(matrix, lines)
     store.dispatch(actions.matrix(nextMatrix))        

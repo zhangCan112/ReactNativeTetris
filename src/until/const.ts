@@ -81,6 +81,10 @@ const blankMatrix = (() => {
     return List(matrix)
 })()
 
+
+let speeds = [800, 650, 500, 370, 250, 160];
+let clearPoints = [100, 300, 700, 1500];
+
 export default {
     screenWidth: width,
     screenHeight: height,
@@ -89,5 +93,7 @@ export default {
     origin,
     fillLine,
     blankLine,
-    blankMatrix,    
+    blankMatrix,
+    speeds,    
+    clearPoints,
 }
