@@ -55,7 +55,9 @@ class App extends Component<IProps, IState> {
       <View style={styles.app}>
         <Decorate>
           <View style={styles.container}>
-            <Matrix matrix={this.props.matrix} cur={this.props.cur}></Matrix>
+            <Matrix matrix={this.props.matrix}
+             cur={this.props.cur} 
+             reset={this.props.reset}/>
             {this.renderNumberPad()}
           </View>
         </Decorate>
@@ -64,6 +66,7 @@ class App extends Component<IProps, IState> {
         right={control.right} 
         rotate={control.rotate}
         pause={control.pause}
+        reset={control.reset}
         />
       </View>
     );
@@ -164,7 +167,8 @@ const padStyles = StyleSheet.create({
 
 
 const mapStateToProps = (state: GlobalState) => ({
-  pause: state.get('pause') as StateMapObject['pause'],
+  pause: state.get('pause') as StateMapObject['pause'], 
+  reset: state.get('reset') as StateMapObject['reset'], 
   matrix: state.get('matrix') as StateMapObject['matrix'],
   next: state.get('next') as StateMapObject['next'],
   cur: state.get('cur') as StateMapObject['cur'],

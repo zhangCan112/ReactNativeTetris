@@ -21,14 +21,16 @@ import states from '../../control/states';
 
 interface IProps {
     matrix: List<List<MatrixPoint>>,
-    cur?: TetrisBlock
+    cur?: TetrisBlock,
+    reset: boolean,
 }
 
 interface IState {
     clearLins: number[],
     animateColor: '#560000' | '#000000',
     animateStep: number,
-    animateOver: boolean,    
+    animateOver: boolean,
+    overStep: number,    
 }
 
 
@@ -41,21 +43,25 @@ export default class Matrix extends Component<IProps, IState> {
             animateColor: '#000000',
             animateStep: 0,
             animateOver: true,
+            overStep: 0,
         }
     }
 
 
     componentWillReceiveProps(nextPros: IProps) {
         let isClear = MatrixManager.isClear(nextPros.matrix)            
-        if (isClear !== false && this.state.animateOver) {
+        if (isClear !== false && this.state.animateOver && nextPros.reset == false) {
             let clears  = isClear as number[]
             if (clears.length > 0) {                
                 this.clearAnimate(clears)   
             }            
-        }               
+        } else if (nextPros.reset == true && this.state.overStep == 0) {
+            //开启结束游戏动画
+            this.overAnimate()
+        }          
     }
 
-    //
+    //消除行动画
     clearAnimate = (clears: number[]) => {        
         let onceAnimate = () => { 
             if (this.state.animateStep > 3) {//动画结束
@@ -87,6 +93,25 @@ export default class Matrix extends Component<IProps, IState> {
         setTimeout(onceAnimate, 100)
 
     }
+    //结束游戏动画
+    overAnimate = () => {
+        let onceAnimate = () => {
+            if (this.state.overStep > 19) {//动画结束  
+                states.overEnd()                              
+                this.setState({
+                    ...this.state,
+                    overStep: 0,                    
+                })                                               
+            } else {
+                this.setState({
+                    ...this.state,
+                    overStep: this.state.overStep + 1
+                })
+                setTimeout(onceAnimate, 100)
+            }  
+        }
+        setTimeout(onceAnimate, 100)
+    }
 
     render() {
         let matrix = this.props.matrix
@@ -94,6 +119,16 @@ export default class Matrix extends Component<IProps, IState> {
         if (cur) {
             matrix = MatrixManager.getFinalMatrix(matrix, cur)            
         }
+
+        if (this.props.reset == true) {
+            for (let i = 0; i < this.state.overStep; i++) {
+                let row = matrix.size - i - 1                                
+                matrix = matrix.update(row, (line)=>{
+                    return List(constValue.fillLine)
+                })
+            }
+        }
+
         let blockColorFun = (b: MatrixPoint, y: number) => {
             if (this.state.animateOver) {
                return b == MatrixPoint.X ? '#879372': '#000000'

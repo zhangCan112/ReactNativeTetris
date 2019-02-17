@@ -62,6 +62,14 @@ class States {
   //下一轮
   nextAround = () => {
     let state = store.getState() as any as GlobalState
+
+    let matrix = state.get('matrix') as StateMapObject['matrix']
+    //    
+    if (MatrixManager.isOver(matrix)) {
+      this.overStart()
+      return
+    }
+
     //出现一个降落块
     let next = state.get('next') as StateMapObject['next']
     store.dispatch(actions.moveBlock(new TetrisBlock({type: next})))
@@ -91,10 +99,10 @@ class States {
   }
   
   //暂停
-  pause = () => {
+  pause = (isPause ?: boolean) => {
     let state = store.getState() as any as GlobalState
     let pause = state.get('pause') as StateMapObject['pause']
-    let next = !pause
+    let next = (isPause == null) ? !pause : isPause
     if (next == true) {
       if (this.fallInterval) {
         clearTimeout(this.fallInterval)    
@@ -103,6 +111,19 @@ class States {
       this.auto()      
     } 
     store.dispatch(actions.pause(next))   
+  }
+
+  //结束动画开始
+  overStart = () => {
+    this.pause(true)
+    store.dispatch(actions.reset(true))
+  }
+
+  //结束动画结束
+  overEnd = () => {
+    store.dispatch(actions.pause(false))
+    store.dispatch(actions.reset(false))
+    this.start()
   }
 
   

@@ -6,6 +6,7 @@ import left from './todo/left';
 import right from './todo/right';
 import rotate from './todo/rotate';
 import pause from './todo/pause';
+import reset from './todo/reset';
 
 
 let caseWithoutPause = (operation : (...args: any)=>any) => (...args: any)  =>  {
@@ -21,6 +22,7 @@ let caseWithoutPause = (operation : (...args: any)=>any) => (...args: any)  =>  
 
 let control = {
     pause,
+    reset,
     left: caseWithoutPause(left),
     right: caseWithoutPause(right),
     rotate: caseWithoutPause(rotate),    

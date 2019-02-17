@@ -21,6 +21,7 @@ interface IProps {
     right: (...args: any)=> void,
     rotate: (...args: any)=> void,
     pause: (...args: any)=> void,
+    reset: (...args: any)=> void,
 }
 
 export default class Keyboard extends Component<IProps> {
@@ -31,7 +32,7 @@ export default class Keyboard extends Component<IProps> {
                     <View style={styles.leftSubTopArea}>
                         <Button label='暂停(P)' colors={['#4bc441', '#0ec400']} size={Size.S3} onPress={this.props.pause}/>
                         <Button label='音效(S)' colors={['#4bc441', '#0ec400']} size={Size.S3} />
-                        <Button label='重玩(R)' colors={['#dc3333', '#de0000']} size={Size.S3} />
+                        <Button label='重玩(R)' colors={['#dc3333', '#de0000']} size={Size.S3} onPress={this.props.reset}/>
                     </View>
                     <View style={styles.leftSubBottomArea}>
                         <Button label='掉落(SPACE)' colors={['#6e77ef', '#4652f3']} size={Size.S1} />

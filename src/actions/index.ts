@@ -1,4 +1,4 @@
-import { NEXT_BLOCK, MOVE_BLOCK, START_LINES, MATRIX, CLEAR_LINES, POINTS, MAX, PAUSE } from './../until/reducerType';
+import { NEXT_BLOCK, MOVE_BLOCK, START_LINES, MATRIX, CLEAR_LINES, POINTS, MAX, PAUSE, RESET } from './../until/reducerType';
 import { BlockType, MatrixPoint } from './../until/const';
 import { actionCreator, actionCreator_1 } from "../until/action";
 import TetrisBlock from "../control/tetrisBlock";
@@ -15,4 +15,5 @@ export default {
     points: actionCreator(POINTS, 0),
     max: actionCreator(MAX, 0),
     pause: actionCreator(PAUSE, false),
+    reset: actionCreator(RESET, false),
 };

@@ -119,6 +119,18 @@ class MatrixManager {
         return matrix
     }
 
+    ///是否达到游戏结束的条件
+    isOver = (matrix: List<List<MatrixPoint>>)=>{
+        //游戏结束标准-游戏第一行存在块，就认为游戏结束了
+        let firstLine =  matrix.get(0)
+        if (firstLine) {
+           return firstLine.some(b => b==MatrixPoint.O)            
+        }
+                                
+        return false
+    }
+
+
     /**
      * 私有方法
      */

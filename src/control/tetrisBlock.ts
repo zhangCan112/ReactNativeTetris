@@ -49,7 +49,7 @@ export default class TetrisBlock {
             this.loc = option.loc!
         } else {
             let originLocs = {
-                I : new Point(3, 0),
+                I : new Point(4, 0),
                 L : new Point(4, -1),
                 J : new Point(4, -1),
                 Z : new Point(4, -1),
