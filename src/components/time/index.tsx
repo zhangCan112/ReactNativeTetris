@@ -1,6 +1,7 @@
 import React, { Children } from 'react'
 import { Component } from 'react';
 import Number from '../number';
+import { number } from 'prop-types';
 
 
 interface IProps {
@@ -37,8 +38,13 @@ export default class Time extends Component<IProps,IState> {
       }
 
     render() {
-        let hour = this.state.date.getHours()    
-        let minutes = this.state.date.getMinutes()
+
+        let fillDoubleDigit = (num: number)=>{
+            return num > 10 ? num : `0${num}`
+        }
+
+        let hour = fillDoubleDigit(this.state.date.getHours())    
+        let minutes = fillDoubleDigit(this.state.date.getMinutes())
         let seconds = this.state.date.getSeconds()
         let text = `${hour}${(seconds%2) == 1 ? ':' : '|'}${minutes}`        
         return (
