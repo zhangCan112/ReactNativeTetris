@@ -82,7 +82,7 @@ const blankMatrix = (() => {
 })()
 
 
-let speeds = [1000, 800, 650, 500, 370, 250, 160, 100];
+let speeds = [1000, 800, 650, 500, 370, 250, 160];
 let clearPoints = [100, 300, 700, 1500];
 const maxStartLines = 10
 

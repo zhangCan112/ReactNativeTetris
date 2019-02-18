@@ -31,25 +31,57 @@ export interface IProps {
     labelDirection?: Direction,
     colors: Array<string>,
     onPress?: (event: any) => void,
-    size: Size
+    size: Size,
+    enableLongPress?: boolean,
+    longPressInterval?: number,
 }
 
 
 
 export default class ControlButton extends Component<IProps> {
+
+    componentWillUnmount() {
+        if (this.longPressInterval) {
+            clearTimeout(this.longPressInterval)
+        }
+    }
+
     render() {
 let buttonStyle = createButtonStyle(this.props.size * screenPoint)
         let containerStyle = createContainerStyle(this.props)
         let labelSize = (this.props.size == Size.S1 || this.props.size == Size.S2) ? 17 : 12;
         return (
             <View style={containerStyle}>
-                <TouchableOpacity onPress={this.props.onPress}>
+                <TouchableOpacity onPress={this.props.onPress} onPressIn={this.onPressIn} onPressOut={this.onPressOut}>
                     <LinearGradient style={buttonStyle} colors={this.props.colors} />
                 </TouchableOpacity>
                 <Text style={{ fontSize: labelSize}}>{this.props.label}</Text>
             </View>
         );
     }
+    
+    longPressInterval: number | null = null
+
+    onPressIn = (event: any) => {
+        if (this.props.enableLongPress == true) {
+            if (this.longPressInterval) {
+                clearTimeout(this.longPressInterval)
+            }
+            this.longPressInterval = setInterval(()=>{
+                if (this.props.onPress) {
+                    this.props.onPress!(event)
+                }
+            }, this.props.longPressInterval || 100)
+        }
+        return null
+    }
+
+    onPressOut = () => {
+        if (this.longPressInterval) {
+            clearTimeout(this.longPressInterval)
+        }
+    }
+    
 }
 
 const createContainerStyle = (props: IProps) => {

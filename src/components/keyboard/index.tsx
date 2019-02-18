@@ -43,17 +43,42 @@ export default class Keyboard extends Component<IProps> {
                 <View style={styles.rightArea}>
                     <View style={controlBoxStyles.controlBox}>
                         <View style={controlBoxStyles.line1}>
-                            <Button label='旋转' colors={['#6e77ef', '#4652f3']} size={Size.S2} labelDirection={Direction.Up} onPress={this.props.rotate}/>
+                            <Button 
+                            label='旋转' 
+                            colors={['#6e77ef', '#4652f3']} 
+                            size={Size.S2} 
+                            labelDirection={Direction.Up} 
+                            onPress={this.props.rotate}
+                            enableLongPress={true}
+                            longPressInterval={250}/>
                         </View>
                         <View style={controlBoxStyles.line2}>
-                            <Button label='左移' colors={['#6e77ef', '#4652f3']} size={Size.S2} labelDirection={Direction.Down} onPress={this.props.left}/>
+                            <Button 
+                            label='左移'
+                             colors={['#6e77ef', '#4652f3']} 
+                             size={Size.S2} 
+                             labelDirection={Direction.Down} 
+                             onPress={this.props.left}
+                             enableLongPress={true}/>
                             <View style={controlBoxStyles.arrows}>
                             <Arrows></Arrows>
                             </View>
-                            <Button label='右移' colors={['#6e77ef', '#4652f3']} size={Size.S2} labelDirection={Direction.Down} onPress={this.props.right}/>
+                            <Button 
+                            label='右移' 
+                            colors={['#6e77ef', '#4652f3']} 
+                            size={Size.S2} 
+                            labelDirection={Direction.Down} 
+                            onPress={this.props.right}
+                            enableLongPress={true}/>
                         </View>
                         <View style={controlBoxStyles.line3}>
-                            <Button label='下移' colors={['#6e77ef', '#4652f3']} size={Size.S2} onPress={this.props.down}/></View>
+                            <Button 
+                            label='下移' 
+                            colors={['#6e77ef', '#4652f3']} 
+                            size={Size.S2}
+                            onPress={this.props.down}
+                            enableLongPress={true}/>
+                            </View>
                     </View>
                 </View>
             </View>
