@@ -82,7 +82,7 @@ class App extends Component<IProps, IState> {
     if (this.props.pause == true) {
       pauseSrc = (this.state.blinkCount%2) == 1 ? pauseOnSrc : pauseOffSrc;     
     }     
-    let level = `${this.props.cur ? this.props.speedRun : this.props.speedStart}`
+    let level = `${this.props.lock ? this.props.speedStart : this.props.speedRun}`
     let scoreTitle = (this.state.blinkCount%16) > 8 ? '最高分' : '得分'
     let score = (this.state.blinkCount%16) > 8 ? this.props.max : this.props.points
     return (<View style={padStyles.container}>

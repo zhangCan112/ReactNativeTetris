@@ -41,8 +41,9 @@ class States {
 
 
   //自动下落
-  auto = (timeout = 300) => {
-   let fall = () => {
+  auto = () => {
+    
+   let fall = () => {      
       let state = store.getState() as any as GlobalState
       let cur = state.get('cur') as StateMapObject['cur']
       let next = cur.fall()
@@ -50,6 +51,8 @@ class States {
       //当前块如果可以继续向下移动，就继续移动
       if (MatrixManager.want(matrix, next)) {
         store.dispatch(actions.moveBlock(new TetrisBlock(next)))      
+        let speedRun = (state.get('speed') as StateMapObject['speed']).get('run') || 0
+        let timeout = constValue.speeds[speedRun];
         this.fallInterval = setTimeout(fall, timeout)
       } else {//如果不能下落就计入并更新当前矩阵
         matrix = MatrixManager.getFinalMatrix(matrix, cur)
@@ -60,7 +63,10 @@ class States {
     if (this.fallInterval) {
       clearTimeout(this.fallInterval)    
     }    
-    
+
+    let state = store.getState() as any as GlobalState
+    let speedRun = (state.get('speed') as StateMapObject['speed']).get('run') || 0
+    let timeout = constValue.speeds[speedRun];
     this.fallInterval = setTimeout(fall, timeout)    
   }
 
@@ -80,7 +86,7 @@ class States {
     store.dispatch(actions.moveBlock(new TetrisBlock({type: next})))
     //生成下一个要出现的块
     store.dispatch(actions.nextBlock(MatrixManager.getNextType()))
-    //自动下落
+    //自动下落     
     states.auto()                 
   }
 
