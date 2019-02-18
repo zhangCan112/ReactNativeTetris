@@ -47,8 +47,7 @@ class App extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.blink()
-    states.start()    
+    this.blink()        
   }
 
   render() {

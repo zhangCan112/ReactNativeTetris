@@ -1,7 +1,7 @@
 import { LOCK, reducerCreator } from '../../until/reducerType';
 
 
-let initState = false
+let initState = true
 
 const lock = reducerCreator(LOCK, initState)
 
