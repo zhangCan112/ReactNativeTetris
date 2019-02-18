@@ -71,7 +71,7 @@ let buttonStyle = createButtonStyle(this.props.size * screenPoint)
                 if (this.props.onPress) {
                     this.props.onPress!(event)
                 }
-            }, this.props.longPressInterval || 100)
+            }, this.props.longPressInterval || 200)
         }
         return null
     }
