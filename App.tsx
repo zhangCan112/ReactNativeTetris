@@ -20,6 +20,7 @@ import control from './src/control';
 import Number from './src/components/number';
 import Next from './src/components/next';
 import Time from './src/components/time';
+import Lock from './src/components/lock';
 
 
 let soundOnSrc = require('./src/resource/images/music_on.png')
@@ -55,10 +56,13 @@ class App extends Component<IProps, IState> {
       <View style={styles.app}>
         <Decorate>
           <View style={styles.container}>
-            <Matrix matrix={this.props.matrix}
+           <View>
+           <Matrix matrix={this.props.matrix}
              cur={this.props.cur} 
              reset={this.props.reset}/>
-            {this.renderNumberPad()}
+             <Lock></Lock>
+           </View>
+            {this.renderNumberPad()}                        
           </View>
         </Decorate>
         <Keyboard 
@@ -71,7 +75,7 @@ class App extends Component<IProps, IState> {
       </View>
     );
   }
-  renderNumberPad = () => {
+  renderNumberPad = () => {    
     let soundSrc = soundOffSrc
     let pauseSrc = pauseOffSrc
     if (this.props.pause == true) {
