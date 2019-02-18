@@ -18,8 +18,13 @@ class States {
   
   //游戏开始
   start = () => {      
-      let state = store.getState() as any as GlobalState
       
+       //取消锁定状态和暂停状态和重置状态
+       store.dispatch(actions.lock(false))
+       store.dispatch(actions.pause(false))
+       store.dispatch(actions.reset(false))
+
+      let state = store.getState() as any as GlobalState      
       //生成初始矩阵
       let startLines =  state.get('startLines') as StateMapObject['startLines']      
       let startMatrix = MatrixManager.getStartMatrix(startLines);
@@ -120,10 +125,14 @@ class States {
   }
 
   //结束动画结束
-  overEnd = () => {
+  overEnd = () => {           
     store.dispatch(actions.pause(false))
     store.dispatch(actions.reset(false))
-    this.start()
+    store.dispatch(actions.matrix(constValue.blankMatrix))        
+    store.dispatch(actions.lock(true))
+    store.dispatch(actions.points(0))
+    store.dispatch(actions.clearLines(0))   
+
   }
 
   

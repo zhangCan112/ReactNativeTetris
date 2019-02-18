@@ -58,9 +58,9 @@ class App extends Component<IProps, IState> {
           <View style={styles.container}>
            <View>
            <Matrix matrix={this.props.matrix}
-             cur={this.props.cur} 
+             cur={this.props.lock ? undefined : this.props.cur} 
              reset={this.props.reset}/>
-             <Lock></Lock>
+             {this.props.lock ? <Lock/> : null}
            </View>
             {this.renderNumberPad()}                        
           </View>
@@ -173,6 +173,7 @@ const padStyles = StyleSheet.create({
 const mapStateToProps = (state: GlobalState) => ({
   pause: state.get('pause') as StateMapObject['pause'], 
   reset: state.get('reset') as StateMapObject['reset'], 
+  lock: state.get('lock') as StateMapObject['lock'], 
   matrix: state.get('matrix') as StateMapObject['matrix'],
   next: state.get('next') as StateMapObject['next'],
   cur: state.get('cur') as StateMapObject['cur'],

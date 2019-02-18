@@ -9,6 +9,7 @@ import points from './points';
 import startLines from './startLines';
 import speed from './speed';
 import reset from './reset'
+import lock from './lock'
 import { Map } from 'immutable';
 import { ReducersMapObject } from 'redux';
 import { Reducer } from 'react';
@@ -25,6 +26,7 @@ let reducersMapObject = {
   pause,
   speed,
   reset,
+  lock,
 }
 
 const rootReducer = combineReducers(reducersMapObject);
