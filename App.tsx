@@ -71,6 +71,8 @@ class App extends Component<IProps, IState> {
         rotate={control.rotate}
         pause={control.pause}
         reset={control.reset}
+        down={control.down}
+        space={control.space}
         />
       </View>
     );

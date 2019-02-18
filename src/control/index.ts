@@ -4,9 +4,11 @@ import { GlobalState, StateMapObject } from './../reducers/index';
 
 import left from './todo/left';
 import right from './todo/right';
+import down from './todo/down';
 import rotate from './todo/rotate';
 import pause from './todo/pause';
 import reset from './todo/reset';
+import space from './todo/space';
 
 
 let caseWithoutPause = (operation : (...args: any)=>any) => (...args: any)  =>  {
@@ -25,7 +27,9 @@ let control = {
     reset,
     left: caseWithoutPause(left),
     right: caseWithoutPause(right),
-    rotate: caseWithoutPause(rotate),    
+    rotate: caseWithoutPause(rotate),
+    down: caseWithoutPause(down),    
+    space: caseWithoutPause(space),
 }
 
 export default control

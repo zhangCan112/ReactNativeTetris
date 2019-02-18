@@ -22,6 +22,8 @@ interface IProps {
     rotate: (...args: any)=> void,
     pause: (...args: any)=> void,
     reset: (...args: any)=> void,
+    down: (...args: any)=> void,
+    space: (...args: any)=> void,
 }
 
 export default class Keyboard extends Component<IProps> {
@@ -35,7 +37,7 @@ export default class Keyboard extends Component<IProps> {
                         <Button label='重玩(R)' colors={['#dc3333', '#de0000']} size={Size.S3} onPress={this.props.reset}/>
                     </View>
                     <View style={styles.leftSubBottomArea}>
-                        <Button label='掉落(SPACE)' colors={['#6e77ef', '#4652f3']} size={Size.S1} />
+                        <Button label='掉落(SPACE)' colors={['#6e77ef', '#4652f3']} size={Size.S1} onPress={this.props.space}/>
                     </View>
                 </View>
                 <View style={styles.rightArea}>
@@ -51,7 +53,7 @@ export default class Keyboard extends Component<IProps> {
                             <Button label='右移' colors={['#6e77ef', '#4652f3']} size={Size.S2} labelDirection={Direction.Down} onPress={this.props.right}/>
                         </View>
                         <View style={controlBoxStyles.line3}>
-                            <Button label='下移' colors={['#6e77ef', '#4652f3']} size={Size.S2} /></View>
+                            <Button label='下移' colors={['#6e77ef', '#4652f3']} size={Size.S2} onPress={this.props.down}/></View>
                     </View>
                 </View>
             </View>
