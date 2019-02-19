@@ -4740,6 +4740,11 @@ react-native-linear-gradient@^2.5.3:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.3.tgz#d90cf19a13fcccfa8bb32025ac40a15ae1b49e99"
   integrity sha512-XdusrOXXlkI+yQpUW7YLeiq9cZiBwkvQX4XEkHPVrJ9H47gsKmdgBwObkZBzBQUP0dKK/Sg6aVpETEis4w43bQ==
 
+react-native-storage@^1.0.0-beta.0:
+  version "1.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/react-native-storage/-/react-native-storage-1.0.0-beta.0.tgz#cde11c67b50df7ea39503fdc9531c4cc6336761b"
+  integrity sha512-xZPKcbTNOIhwUaqaz2ApBMpLcScg5a1WNu61h0BNNxKPmfXdRX+nnOjh8Yk9x4W554eXRvbU2JzUlXJtZM2h8g==
+
 react-native-typescript-transformer@^1.2.11:
   version "1.2.11"
   resolved "http://registry.npm.taobao.org/react-native-typescript-transformer/download/react-native-typescript-transformer-1.2.11.tgz#679398c27262cf941e5a5f3ea45cf7eea715d557"

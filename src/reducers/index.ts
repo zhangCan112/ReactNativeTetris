@@ -15,7 +15,7 @@ import { ReducersMapObject } from 'redux';
 import { Reducer } from 'react';
 
 
-let reducersMapObject = {
+export let reducersMapObject = {
   clearLines,
   startLines,
   matrix,
