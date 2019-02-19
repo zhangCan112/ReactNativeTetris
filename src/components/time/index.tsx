@@ -40,7 +40,7 @@ export default class Time extends Component<IProps,IState> {
     render() {
 
         let fillDoubleDigit = (num: number)=>{
-            return num > 10 ? num : `0${num}`
+            return num > 9 ? num : `0${num}`
         }
 
         let hour = fillDoubleDigit(this.state.date.getHours())    
