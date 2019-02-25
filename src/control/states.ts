@@ -50,7 +50,8 @@ class States {
    let fall = () => {      
       let state = store.getState() as any as GlobalState
       let pause =  state.get('pause') as StateMapObject['pause'];
-      if (pause) {//如果暂停就什么也不错，等下一轮
+      let lock =  state.get('lock') as StateMapObject['lock'];
+      if (pause || lock) {//如果暂停或锁定就什么也不错，等下一轮
         let speedRun = (state.get('speed') as StateMapObject['speed']).get('run') || 0
         let timeout = constValue.speeds[speedRun];
         this.fallInterval = setTimeout(fall, timeout)

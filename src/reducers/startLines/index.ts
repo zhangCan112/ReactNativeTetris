@@ -1,7 +1,7 @@
 import { START_LINES, reducerCreator } from '../../until/reducerType';
 
 
-let initState = 1
+let initState = 0
 
 const startLines = reducerCreator(START_LINES, initState)
 
