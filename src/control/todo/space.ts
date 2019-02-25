@@ -13,10 +13,10 @@ let space = () => {
 
     
     for (let step = 0; step < matrix.size; step++) {
-        let next = cur.fall(step)
+        let next = (new TetrisBlock(cur)).fall(step)
         if (!MatrixManager.want(matrix, next)) {
-            next = cur.fall(step - 1)  
-            store.dispatch(actions.moveBlock(new TetrisBlock(next)))            
+            next = (new TetrisBlock(cur)).fall(step - 1)  
+            store.dispatch(actions.moveBlock(next))            
             break;
         }
     }            

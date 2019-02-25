@@ -10,7 +10,7 @@ let right = ()=> {
     let state = store.getState() as any as GlobalState
     let matrix = state.get('matrix') as StateMapObject['matrix']
     let cur = state.get('cur') as StateMapObject['cur']    
-    let next = cur.right()
+    let next = (new TetrisBlock(cur)).right()
     if (MatrixManager.want(matrix, next)) {
         store.dispatch(actions.moveBlock(new TetrisBlock(next)))        
     }    

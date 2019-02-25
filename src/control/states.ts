@@ -16,27 +16,31 @@ class States {
   // 自动下落setTimeout变量
   fallInterval?: number = undefined
   
+
+  //初始化
+  init  = () => {
+    let state = store.getState() as any as GlobalState      
+    //生成初始矩阵
+    let startLines =  state.get('startLines') as StateMapObject['startLines']      
+    let startMatrix = MatrixManager.getStartMatrix(startLines);
+    store.dispatch(actions.matrix(startMatrix)) 
+
+    //出现一个降落块
+    let next = state.get('next') as StateMapObject['next']
+    store.dispatch(actions.moveBlock(new TetrisBlock({type: next})))
+    //生成下一个要出现的块
+    store.dispatch(actions.nextBlock())
+    //自动下落
+    states.auto()
+  }
+
   //游戏开始
-  start = () => {      
-      
+  start = () => {            
        //取消锁定状态和暂停状态和重置状态
        store.dispatch(actions.lock(false))
        store.dispatch(actions.pause(false))
-       store.dispatch(actions.reset(false))
-
-      let state = store.getState() as any as GlobalState      
-      //生成初始矩阵
-      let startLines =  state.get('startLines') as StateMapObject['startLines']      
-      let startMatrix = MatrixManager.getStartMatrix(startLines);
-      store.dispatch(actions.matrix(startMatrix)) 
-
-      //出现一个降落块
-      let next = state.get('next') as StateMapObject['next']
-      store.dispatch(actions.moveBlock(new TetrisBlock({type: next})))
-      //生成下一个要出现的块
-      store.dispatch(actions.nextBlock())
-      //自动下落
-      states.auto()                 
+       store.dispatch(actions.reset(false))    
+       this.init()             
   }
 
 
@@ -45,9 +49,16 @@ class States {
     
    let fall = () => {      
       let state = store.getState() as any as GlobalState
+      let pause =  state.get('pause') as StateMapObject['pause'];
+      if (pause) {//如果暂停就什么也不错，等下一轮
+        let speedRun = (state.get('speed') as StateMapObject['speed']).get('run') || 0
+        let timeout = constValue.speeds[speedRun];
+        this.fallInterval = setTimeout(fall, timeout)
+        return;             
+      }
       let cur = state.get('cur') as StateMapObject['cur']
-      let next = cur.fall()
-      let matrix = state.get('matrix') as StateMapObject['matrix']
+      let next = (new TetrisBlock(cur)).fall()
+      let matrix = state.get('matrix') as StateMapObject['matrix']                        
       //当前块如果可以继续向下移动，就继续移动
       if (MatrixManager.want(matrix, next)) {
         store.dispatch(actions.moveBlock(new TetrisBlock(next)))      
@@ -55,7 +66,7 @@ class States {
         let timeout = constValue.speeds[speedRun];
         this.fallInterval = setTimeout(fall, timeout)
       } else {//如果不能下落就计入并更新当前矩阵
-        matrix = MatrixManager.getFinalMatrix(matrix, cur)
+        matrix = MatrixManager.getFinalMatrix(matrix, new TetrisBlock(cur))
         store.dispatch(actions.matrix(matrix))
         this.nextAround()
       } 
@@ -113,14 +124,7 @@ class States {
   pause = (isPause ?: boolean) => {
     let state = store.getState() as any as GlobalState
     let pause = state.get('pause') as StateMapObject['pause']
-    let next = (isPause == null) ? !pause : isPause
-    if (next == true) {
-      if (this.fallInterval) {
-        clearTimeout(this.fallInterval)    
-      }  
-    } else {
-      this.auto()      
-    } 
+    let next = (isPause == null) ? !pause : isPause     
     store.dispatch(actions.pause(next))   
   }
 

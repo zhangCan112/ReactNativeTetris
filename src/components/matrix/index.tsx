@@ -14,14 +14,14 @@ import { List } from 'immutable';
 
 import constValue, { MatrixPoint } from '../../until/const'
 import MatrixManager from '../../control/matrixManager';
-import TetrisBlock from '../../control/tetrisBlock';
+import TetrisBlock, { TetrisBlockOption } from '../../control/tetrisBlock';
 import states from '../../control/states';
 
 
 
 interface IProps {
     matrix: List<List<MatrixPoint>>,
-    cur?: TetrisBlock,
+    cur?: TetrisBlockOption,
     reset: boolean,
 }
 
@@ -117,7 +117,7 @@ export default class Matrix extends Component<IProps, IState> {
         let matrix = this.props.matrix
         let cur = this.props.cur
         if (cur) {
-            matrix = MatrixManager.getFinalMatrix(matrix, cur)            
+            matrix = MatrixManager.getFinalMatrix(matrix, new TetrisBlock(cur))            
         }
 
         if (this.props.reset == true) {

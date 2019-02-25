@@ -14,12 +14,15 @@ import { Component } from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import { subscribeRecord , lastRecord} from './src/until/subscribe';
+import states from './src/control/states';
  subscribeRecord(store)
  
  class Container extends Component {
    componentDidMount() {
      lastRecord()
+     states.init()
    }
+   
     render() {
       return (
         <Provider store={store}>
