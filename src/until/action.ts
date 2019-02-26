@@ -4,11 +4,12 @@ export interface Action<T> {
     data: T
 }
 
-export let actionCreator = <T>(type: string, initData?: T) => (data = initData) => {    
+export let actionCreator = <T>(type: string, initData?: T, actionHandle = (action: Action<T>)=>{}) => (data = initData) => {    
     let action: Action<T> = {
         type,
         data: data as T,
     }
+    actionHandle && actionHandle(action)
     return action
 }
 

@@ -22,7 +22,6 @@ import Next from './src/components/next';
 import Time from './src/components/time';
 import Lock from './src/components/lock';
 
-
 let soundOnSrc = require('./src/resource/images/music_on.png')
 let soundOffSrc = require('./src/resource/images/music_off.png')
 
@@ -50,7 +49,7 @@ class App extends Component<IProps, IState> {
     this.blink()        
   }
 
-  render() {
+  render() {    
     return (
       <View style={styles.app}>
         <Decorate>
@@ -72,12 +71,13 @@ class App extends Component<IProps, IState> {
         reset={control.reset}
         down={control.down}
         space={control.space}
+        music={control.music}
         />
       </View>
     );
   }
   renderNumberPad = () => {    
-    let soundSrc = soundOffSrc
+    let soundSrc = this.props.music ? soundOnSrc : soundOffSrc
     let pauseSrc = pauseOffSrc
     if (this.props.pause == true) {
       pauseSrc = (this.state.blinkCount%2) == 1 ? pauseOnSrc : pauseOffSrc;     
@@ -174,7 +174,8 @@ const padStyles = StyleSheet.create({
 const mapStateToProps = (state: GlobalState) => ({
   pause: state.get('pause') as StateMapObject['pause'], 
   reset: state.get('reset') as StateMapObject['reset'], 
-  lock: state.get('lock') as StateMapObject['lock'], 
+  lock: state.get('lock') as StateMapObject['lock'],
+  music: state.get('music') as StateMapObject['music'], 
   matrix: state.get('matrix') as StateMapObject['matrix'],
   next: state.get('next') as StateMapObject['next'],
   cur: state.get('cur') as StateMapObject['cur'],

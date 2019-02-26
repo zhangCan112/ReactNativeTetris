@@ -5,6 +5,7 @@ import actions from '../../actions';
 import { GlobalState } from '../../reducers';
 import MatrixManager from '../matrixManager';
 import TetrisBlock from '../tetrisBlock';
+import musicManager from '../../until/music';
 
 let down = () => {
     let state = store.getState() as any as GlobalState
@@ -14,6 +15,7 @@ let down = () => {
     if (MatrixManager.want(matrix, next)) {
         store.dispatch(actions.moveBlock(next))                
     }
+    musicManager.move()
 }
 
 export default down;

@@ -10,6 +10,7 @@ import startLines from './startLines';
 import speed from './speed';
 import reset from './reset'
 import lock from './lock'
+import music from './music';
 import { Map } from 'immutable';
 import { ReducersMapObject } from 'redux';
 import { Reducer } from 'react';
@@ -27,6 +28,7 @@ export let reducersMapObject = {
   speed,
   reset,
   lock,
+  music,
 }
 
 const rootReducer = combineReducers(reducersMapObject);

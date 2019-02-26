@@ -11,7 +11,7 @@ import MatrixManager from './matrixManager';
 import actions from '../actions';
 import TetrisBlock from './tetrisBlock';
 import constValue from '../until/const';
-
+import musicManager from '../until/music';
 class States {
   // 自动下落setTimeout变量
   fallInterval?: number = undefined
@@ -23,7 +23,7 @@ class States {
     //生成初始矩阵
     let startLines =  state.get('startLines') as StateMapObject['startLines']      
     let startMatrix = MatrixManager.getStartMatrix(startLines);
-    store.dispatch(actions.matrix(startMatrix)) 
+    store.dispatch(actions.matrix(startMatrix))     
 
     //出现一个降落块
     let next = state.get('next') as StateMapObject['next']
@@ -40,7 +40,8 @@ class States {
        store.dispatch(actions.lock(false))
        store.dispatch(actions.pause(false))
        store.dispatch(actions.reset(false))    
-       this.init()             
+       this.init()
+       musicManager.start()
   }
 
 
@@ -62,7 +63,7 @@ class States {
       let matrix = state.get('matrix') as StateMapObject['matrix']                        
       //当前块如果可以继续向下移动，就继续移动
       if (MatrixManager.want(matrix, next)) {
-        store.dispatch(actions.moveBlock(new TetrisBlock(next)))      
+        store.dispatch(actions.moveBlock(new TetrisBlock(next)))              
         let speedRun = (state.get('speed') as StateMapObject['speed']).get('run') || 0
         let timeout = constValue.speeds[speedRun];
         this.fallInterval = setTimeout(fall, timeout)
@@ -127,12 +128,14 @@ class States {
     let pause = state.get('pause') as StateMapObject['pause']
     let next = (isPause == null) ? !pause : isPause     
     store.dispatch(actions.pause(next))   
+    musicManager.move()
   }
 
   //结束动画开始
   overStart = () => {
     this.pause(true)
     store.dispatch(actions.reset(true))
+    musicManager.gameOver()
   }
 
   //结束动画结束
@@ -142,8 +145,7 @@ class States {
     store.dispatch(actions.matrix(constValue.blankMatrix))        
     store.dispatch(actions.lock(true))
     store.dispatch(actions.points(0))
-    store.dispatch(actions.clearLines(0))   
-
+    store.dispatch(actions.clearLines(0))       
   }
 
   

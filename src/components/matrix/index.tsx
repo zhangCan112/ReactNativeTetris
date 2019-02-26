@@ -16,7 +16,7 @@ import constValue, { MatrixPoint } from '../../until/const'
 import MatrixManager from '../../control/matrixManager';
 import TetrisBlock, { TetrisBlockOption } from '../../control/tetrisBlock';
 import states from '../../control/states';
-
+import MusicManager from '../../until/music';
 
 
 interface IProps {
@@ -80,7 +80,7 @@ export default class Matrix extends Component<IProps, IState> {
                     animateStep: this.state.animateStep + 1,
                     animateColor: this.state.animateColor == '#000000' ? '#560000' : '#000000'                                        
                 })
-                setTimeout(onceAnimate, 100)
+                setTimeout(onceAnimate, 200)
             }                       
         }                
 
@@ -90,7 +90,8 @@ export default class Matrix extends Component<IProps, IState> {
             animateStep: 0,
             animateOver: false,
         })
-        setTimeout(onceAnimate, 100)
+        MusicManager.clear()
+        setTimeout(onceAnimate, 200)
 
     }
     //结束游戏动画
