@@ -11,8 +11,14 @@ import { Component } from 'react';
 import { Provider } from 'react-redux';
 import { subscribeRecord , lastRecord} from './src/until/subscribe';
 import states from './src/control/states';
+
+
+if (process.env.NODE_ENV !== 'production') {
+  const {whyDidYouUpdate} = require('why-did-you-update');
+  whyDidYouUpdate(React);
+}
+
  subscribeRecord(store)
- 
  export default class App extends Component {
    componentDidMount() {
      lastRecord()
