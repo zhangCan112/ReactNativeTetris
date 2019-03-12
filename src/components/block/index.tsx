@@ -15,7 +15,15 @@ export interface IProps {
     size?: number
 }
 
-export default class Block extends Component<IProps> {
+export default class Block extends Component<IProps> {    
+
+    shouldComponentUpdate(nextProps: IProps) {
+        if (this.props.size != nextProps.size || this.props.color != nextProps.color) {
+            return true
+        }
+        return false
+    }
+
     render() {        
         let styles = createStyles(this.props)
         return (

@@ -28,6 +28,10 @@ interface IProps {
 }
 
 export default class Keyboard extends Component<IProps> {
+    
+    shouldComponentUpdate() {
+        return false;
+    }
     render() {
         return (
             <View style={styles.container}>

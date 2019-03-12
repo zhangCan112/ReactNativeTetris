@@ -12,6 +12,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 
 export default class Arrows extends Component {
+    shouldComponentUpdate() {
+        return false;
+    }
     render() {
         return (
             <View style={styles.container}>

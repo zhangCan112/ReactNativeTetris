@@ -37,7 +37,14 @@ let shapeOriginMap = {
 }
 
 export default class Next extends Component<Iprops> {
-        
+    
+    shouldComponentUpdate(nextProps: Iprops) {
+        if (this.props.shapeType != nextProps.shapeType) {
+            return true
+        }
+        return false
+    }
+    
     render() {                 
         let matrix = this.getFinalMatrix()
         return (

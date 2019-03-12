@@ -19,6 +19,13 @@ let nullImg = require('../../resource/images/num_null.png')
 
 export default class Number extends Component<Iprops> {
     
+    shouldComponentUpdate(nextProps: Iprops) {
+        if (this.props.maxLength == nextProps.maxLength && this.props.text == nextProps.text) {
+            return false
+        }
+        return true
+    }
+
     render() {
         let maxLength = this.props.maxLength || 1
         let text = this.props.text || ''

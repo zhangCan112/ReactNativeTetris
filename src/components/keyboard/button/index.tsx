@@ -39,7 +39,7 @@ export interface IProps {
 
 
 export default class ControlButton extends Component<IProps> {
-
+        
     componentWillUnmount() {
         if (this.longPressInterval) {
             clearTimeout(this.longPressInterval)

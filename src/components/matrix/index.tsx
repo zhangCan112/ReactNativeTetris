@@ -10,7 +10,7 @@ import React from 'react'
 import { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Block from '../block';
-import { List } from 'immutable';
+import { List, is } from 'immutable';
 
 import constValue, { MatrixPoint } from '../../until/const'
 import MatrixManager from '../../control/matrixManager';
@@ -45,6 +45,17 @@ export default class Matrix extends Component<IProps, IState> {
             animateOver: true,
             overStep: 0,
         }
+    }
+
+    shouldComponentUpdate(nextPros: IProps, nextState: IState) {
+        if (this.props.cur == nextPros.cur 
+            && this.props.reset == nextPros.reset
+            && is(this.props.matrix, nextPros.matrix)
+            && this.state == nextState) {
+            return false
+        }
+
+        return true
     }
 
 
