@@ -2,7 +2,7 @@
 俄罗斯方块ReactNative版本的练手项目，
 项目是参考和学习大神的react项目[react-tetris](https://github.com/chvin/react-tetris)而来，第一次见到时十分震惊和羡慕。终于在近期公司要求学习TypeScript的档口，又是年后这个相对清闲一点，于是就想用这个来练手。
 ## 效果预览
-![操作演示]()
+![操作演示](https://github.com/zhangCan112/ReactNativeTetris/blob/master/shareResource/预览视频.gif)
 
 ## 练手目标
 用ReactNative实现react-tetris中的所有目标，如音效，持久化保存等。此外新的目标就是使用TypeScript来实现
@@ -69,4 +69,11 @@ RN的渲染优化本质上和react的渲染优化并无区别，但是由于RN�
 5. react-perf-tool
 对于1，2 我认为并不适用于RN端。3是React 官方推出的一个性能工具包，我没有实际使用过了大家可以试试。
 我重点要说的是why-did-you-update这款工具，对于RN十分好用。它就是专门针对shouldComponentUpdate进行优化的工具。它会比较组件的 state 和 props 的变化，如果两次渲染值是没有改变的，会提示去避免re-render。
-![](https://camo.githubusercontent.com/0f34a575ad3f81c9826f54c03a17da848e1ee038/687474703a2f2f692e696d6775722e636f6d2f556938595542652e706e67)
+![](https://github.com/zhangCan112/ReactNativeTetris/blob/master/shareResource/图示文件.png)
+在我实际使用中，由于俄罗斯方块这个项目很小，在正常情况下并不存在性能问题。其实对比优化效果是很不明显的。但是在JSDebug模式下项目就会很卡，通过why-did-you-update的优化，项目在JSDebug模式下不卡了，可见重复渲染对RN性能的影响之大。建议大家都可以去试试
+## RN渲染优化之外的
+在shouldComponentUpdate对重复渲染进行优化很重要的一步就是对比数据是否有发生变化，在实际开发过程中，组件传递的数据往往会趋于复杂，此时做数据的深层比较自己手动实现就会变得很困难，而浅层比较基本没有什么作用。这时候immutable就显得很强大。
+
+在我练手开始的初期我是拒绝使用immutable的，因为用起来实现是太麻烦了，但是当我进入到性能优化阶段，我才体会到了immutable的好处，做深层比较实在是太方便啦！
+
+因此对于immutable大家见仁见智，我其实依然不想用它。。。
